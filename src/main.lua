@@ -118,7 +118,7 @@ function love.load()
 	day = math.floor(date.diff(curDate, firstDate):spandays())
 	words = require("data.words")
 	solutions = require("data.solutions")
-	solution = solutions[day]
+	solution = solutions[day % #solutions]
 	nextDate = date(curDate:getyear(), curDate:getmonth(), curDate:getday() + 1)
 	if love.filesystem.exists("save.bin") then
 		save = binser.deserializeN(love.filesystem.read("save.bin"))
@@ -379,7 +379,7 @@ function love.update(dt)
 
 	-- Update save data for day
 	if save.day ~= day then
-		solution = solutions[day]
+		solution = solutions[day % #solutions]
 		nextDate = date(curDate:getyear(), curDate:getmonth(), curDate:getday() + 1)
 
 		-- Game setup variables
